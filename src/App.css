@@ -1,38 +1,49 @@
-.App {
-  text-align: center;
+.container {
+  margin: 40px auto;
+  background-color: white;
+  box-shadow: 2px 5px 15px #888888;
+  padding: 30px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+.v-student {
+  padding: 0px 40px 100px 40px;
+  margin-left: 20px;
+  border-left: 1px solid black;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+
+.table :where(thead, tfoot) :where(th, td) {
+  background-color: #37CDBE !important;
+  padding: 1rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.table-zebra tbody tr:nth-child(even) th,
+.table-zebra tbody tr:nth-child(even) td {
+  background-color: hsl(var(--b3, var(--b1)) / var(--tw-bg-opacity));
+}
+
+.pagination {
+  margin: 30px 30px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: end;
 }
 
-.App-link {
-  color: #61dafb;
+.add-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+hr {
+  color: black;
+  height: 5px;
+}
+
+
+.snb {
+  background: url(https://www.color-hex.com/palettes/16033.png);
+  overflow-x: hidden;
+  scroll-behavior: none;
+
 }
