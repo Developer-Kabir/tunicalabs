@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link} from 'react-router-dom';
 import { useForm } from "react-hook-form";
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
 
 const Register = () => {
     const {
@@ -9,13 +11,20 @@ const Register = () => {
         formState: { errors }
     } = useForm();
 
-    const onSubmit = async (data) => {
-        const name = data.name;
-        const email = data.email;
-        const password = data.password;
+    const [
+        createUserWithEmailAndPassword,
+    ] = useCreateUserWithEmailAndPassword(auth);
+    const [updateProfile] = useUpdateProfile(auth);
+    
+  
 
-        console.log(name, email, password);
-    };
+   
+
+    const onSubmit = async data => {
+        await createUserWithEmailAndPassword(data.email, data.password);
+        await updateProfile({ displayName: data.name });
+        console.log('update done');
+    }
 
     return (
         <section className='h-screen w-screen flex justify-center items-center snb'>

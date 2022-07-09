@@ -1,6 +1,8 @@
-import React from 'react';
-import { Link} from 'react-router-dom';
+
+import { Link , Navigate} from 'react-router-dom';
+import { useAuthState, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
+import auth from '../../firebase.init';
 
 const Login = () => {
     const {
@@ -9,12 +11,26 @@ const Login = () => {
         formState: { errors }
     } = useForm();
 
-    const onSubmit = async (data) => {
-        const email = data.email;
-        const password = data.password;
+    const [
+        signInWithEmailAndPassword,
+      
+    ] = useSignInWithEmailAndPassword(auth);
 
-        console.log(email, password);
-    };
+    const [user] = useAuthState(auth);
+
+ 
+
+
+   
+
+    
+    const onSubmit = data => {
+        signInWithEmailAndPassword(data.email, data.password);
+        if(user){
+            <Navigate  to='/'></Navigate>
+        }
+    }
+
     return (
         <section className='h-screen w-screen flex justify-center items-center snb'>
             <div className='bg-white p-8 rounded shadow lg:w-1/3 md:w-1/2 w-2/3 lg:mx-0 md:mx-0 mx-4'>

@@ -1,7 +1,16 @@
 import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 
 const Table = () => {
+ const [students, setStudents] = useState([]);
+ useEffect( () =>{
+    fetch('http://localhost:5000/students')
+    .then(res => res.json())
+    .then(data => setStudents(data))
+ }, [])
+ 
     return (
         <div className='my-6'>
             <div class="overflow-x-auto">
@@ -20,116 +29,23 @@ const Table = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td>10</td>
-                            <td>Blue Bird</td>
-                            <td>3</td>
-                            <td>A</td>
-                            <td>Active</td>
+                       {
+                        students.map((student, index) =>
+                             <tr
+                        key={student._id}
+                        >
+                            <th>{index + 1}</th>
+                            <td>{student.Name}</td>
+                            <td>{2022 - student.dob}</td>
+                            <td>{student.School}</td>
+                            <td>{student.Class}</td>
+                            <td>{student.Division}</td>
+                            <td>{student.Status}</td>
                             <td><button class="btn btn-active btn-link">Edit</button></td>
                             <td><button class="btn btn-active btn-link">Delete</button></td>
-                        </tr>
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td>10</td>
-                            <td>Blue Bird</td>
-                            <td>3</td>
-                            <td>A</td>
-                            <td>Active</td>
-                            <td><button class="btn btn-active btn-link">Edit</button></td>
-                            <td><button class="btn btn-active btn-link">Delete</button></td>
-                        </tr>
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td>10</td>
-                            <td>Blue Bird</td>
-                            <td>3</td>
-                            <td>A</td>
-                            <td>Active</td>
-                            <td><button class="btn btn-active btn-link">Edit</button></td>
-                            <td><button class="btn btn-active btn-link">Delete</button></td>
-                        </tr>
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td>10</td>
-                            <td>Blue Bird</td>
-                            <td>3</td>
-                            <td>A</td>
-                            <td>Active</td>
-                            <td><button class="btn btn-active btn-link">Edit</button></td>
-                            <td><button class="btn btn-active btn-link">Delete</button></td>
-                        </tr>
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td>10</td>
-                            <td>Blue Bird</td>
-                            <td>3</td>
-                            <td>A</td>
-                            <td>Active</td>
-                            <td><button class="btn btn-active btn-link">Edit</button></td>
-                            <td><button class="btn btn-active btn-link">Delete</button></td>
-                        </tr>
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td>10</td>
-                            <td>Blue Bird</td>
-                            <td>3</td>
-                            <td>A</td>
-                            <td>Active</td>
-                            <td><button class="btn btn-active btn-link">Edit</button></td>
-                            <td><button class="btn btn-active btn-link">Delete</button></td>
-                        </tr>
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td>10</td>
-                            <td>Blue Bird</td>
-                            <td>3</td>
-                            <td>A</td>
-                            <td>Active</td>
-                            <td><button class="btn btn-active btn-link">Edit</button></td>
-                            <td><button class="btn btn-active btn-link">Delete</button></td>
-                        </tr>
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td>10</td>
-                            <td>Blue Bird</td>
-                            <td>3</td>
-                            <td>A</td>
-                            <td>Active</td>
-                            <td><button class="btn btn-active btn-link">Edit</button></td>
-                            <td><button class="btn btn-active btn-link">Delete</button></td>
-                        </tr>
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td>10</td>
-                            <td>Blue Bird</td>
-                            <td>3</td>
-                            <td>A</td>
-                            <td>Active</td>
-                            <td><button class="btn btn-active btn-link">Edit</button></td>
-                            <td><button class="btn btn-active btn-link">Delete</button></td>
-                        </tr>
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td>10</td>
-                            <td>Blue Bird</td>
-                            <td>3</td>
-                            <td>A</td>
-                            <td>Active</td>
-                            <td><button class="btn btn-active btn-link">Edit</button></td>
-                            <td><button class="btn btn-active btn-link">Delete</button></td>
-                        </tr>
+                        </tr> )
+                       }
+                        
                     </tbody>
                 </table>
             </div>
