@@ -10,6 +10,22 @@ const Table = () => {
     .then(res => res.json())
     .then(data => setStudents(data))
  }, [])
+
+ const handleDelete = id => {
+    const proceed = window.confirm('Are you sure to delete the student from your student list ?');
+    if (proceed) {
+        const url = `http://localhost:5000/students/${id}`;
+        fetch(url, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                
+                const remaining = students.filter(item => item._id !== id);
+                setStudents(remaining);
+            })
+    }
+}
  
     return (
         <div className='my-6'>
@@ -42,7 +58,7 @@ const Table = () => {
                             <td>{student.Division}</td>
                             <td>{student.Status}</td>
                             <td><button class="btn btn-active btn-link">Edit</button></td>
-                            <td><button class="btn btn-active btn-link">Delete</button></td>
+                            <td onClick={() => handleDelete(student._id)}><button class="btn btn-active btn-link">Delete</button></td>
                         </tr> )
                        }
                         
