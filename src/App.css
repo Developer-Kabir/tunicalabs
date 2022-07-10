@@ -47,3 +47,7 @@ hr {
   scroll-behavior: none;
 
 }
+
+.modal-box {
+  width: 28%;
+}
